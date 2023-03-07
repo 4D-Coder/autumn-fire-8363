@@ -65,7 +65,7 @@ RSpec.describe 'Plots Index Page' do
         end
 
         expect(current_path).to eq(plots_path)
-        save_and_open_page
+        
         within("div#plot_details-#{@plot_1.id}") do
           expect(page).to_not have_content("#{@plant_4.name}")
         end
