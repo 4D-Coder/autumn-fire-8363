@@ -46,19 +46,32 @@ RSpec.describe 'Plots Index Page' do
         end
       end
 
-      it "Next to each plant I see a link or button to remove the plant from that plot, I click it, and I'm returned to the plot index page" do
+      it "Next to each plant I see a link or button to remove the plant from that plot" do
     
-        within("div#plot-#{@plot_1.id}_plant-#{@plant_1.id}") do
-          expect(page).to have_content(@plant_1.name)
+        within("div#plot-#{@plot_1.id}_plant-#{@plant_4.id}") do
+          expect(page).to have_content(@plant_4.name)
+          expect(page).to have_button("Delete")
+        end
+
+
+      end
+
+      it "I click the link, and I'm returned to the plot index page" do
+        within("div#plot-#{@plot_1.id}_plant-#{@plant_4.id}") do
+          expect(page).to have_content(@plant_4.name)
           expect(page).to have_button("Delete")
           
           click_button "Delete"
         end
 
         expect(current_path).to eq(plots_path)
-        
+        save_and_open_page
         within("div#plot_details-#{@plot_1.id}") do
-          expect(page).to_not have_content("#{@plant_1.name}")
+          expect(page).to_not have_content("#{@plant_4.name}")
+        end
+
+        within("div#plot_details-#{@plot_2.id}") do
+          expect(page).to have_content("#{@plant_4.name}")
         end
       end
     end
