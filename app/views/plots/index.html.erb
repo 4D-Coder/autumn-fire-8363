@@ -1,0 +1,19 @@
+<body>
+  <section id="flight_list">
+    <h3>Plot Details:</h3>
+    <ul>
+      <p><% @plots.each do |plot| %>
+        <div id="plot_details-<%= plot.id %>">
+          <div id="plot_plants">
+            <p>Plants for Plot #<%= plot.number%>:</p>
+            <div id="<%= plot.id%>">
+              <% plot.plants.each do |plant| %>
+                <li><%= plant.name %></li>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %></p>
+    </ul>
+  <section>
+</body>
