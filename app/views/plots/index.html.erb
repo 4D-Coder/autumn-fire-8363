@@ -6,11 +6,12 @@
         <div id="plot_details-<%= plot.id %>">
           <div id="plot_plants">
             <p>Plants for Plot #<%= plot.number%>:</p>
-            <div id="<%= plot.id%>">
               <% plot.plants.each do |plant| %>
-                <li><%= plant.name %></li>
+                <div id="plot-<%= plot.id %>_plant-<%= plant.id%>">
+                  <li><%= plant.name %></li>
+                  <%= button_to "Delete", plant_path(plant.id), method: :delete, params: {plot_id: plot.id}, local: true %></li>
+                </div>
               <% end %>
-            </div>
           </div>
         </div>
       <% end %></p>

@@ -26,8 +26,8 @@ RSpec.describe 'Plots Index Page' do
         visit plots_path
       end
 
-      it "sees a list of all plot numbers, nd under each plot number I see the names of all that plot's plants" do
-        
+      it "sees a list of all plot numbers, and under each plot number I see the names of all that plot's plants" do
+
         within("div#plot_details-#{@plot_1.id}") do
           expect(page).to have_content("Plants for Plot ##{@plot_1.number}")
           expect(page).to have_content(@plant_1.name)
@@ -44,28 +44,23 @@ RSpec.describe 'Plots Index Page' do
         within("div#plot_details-#{@plot_3.id}") do
           expect(page).to have_content("Plants for Plot ##{@plot_3.number}")
         end
-
       end
 
-      # it "I see a link or button to remove that passenger from that flight, I click it, and I'm returned to the flights index page" do
+      it "Next to each plant I see a link or button to remove the plant from that plot, I click it, and I'm returned to the plot index page" do
     
-      #   within("div##{@passenger_1.id}-#{@flight_1.id}") do
-      #     expect(page).to have_content("Tom")
-      #     expect(page).to have_button("Delete")
+        within("div#plot-#{@plot_1.id}_plant-#{@plant_1.id}") do
+          expect(page).to have_content(@plant_1.name)
+          expect(page).to have_button("Delete")
           
-      #     click_button "Delete"
-      #   end
+          click_button "Delete"
+        end
 
-      #   expect(current_path).to eq(flights_path)
+        expect(current_path).to eq(plots_path)
         
-      #   within("div#flight_details-#{@flight_1.id}") do
-      #     expect(page).to_not have_content("#{@passenger_1.name}")
-      #   end
-
-      #   within("div#flight_details-#{@flight_2.id}") do
-      #     expect(page).to have_content("#{@passenger_1.name}")
-      #   end
-      # end
+        within("div#plot_details-#{@plot_1.id}") do
+          expect(page).to_not have_content("#{@plant_1.name}")
+        end
+      end
     end
   end
 end
